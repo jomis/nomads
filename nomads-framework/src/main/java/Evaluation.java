@@ -1,6 +1,8 @@
 import at.ac.tuwien.dsg.mediator.EtcdControl;
 import at.ac.tuwien.dsg.utilities.PerformanceMonitor;
 
+import static java.lang.Thread.sleep;
+
 
 /**
  * Created by jomis on 29/09/14.
@@ -16,8 +18,25 @@ public class Evaluation {
         System.out.println(performanceMonitor.getMemorySize());
         System.out.println(performanceMonitor.getFreeMemorySize());
         System.out.println(performanceMonitor.getFreeDiskSpace());
+        System.out.println(performanceMonitor.getTotalDiskSpace());
+        long freeSpace = performanceMonitor.getFreeDiskSpace();
+        long totalSpace = performanceMonitor.getTotalDiskSpace();
 
+        double percentage = (100/(double)totalSpace) * (double)freeSpace;
+
+        System.out.println(percentage);
         EtcdControl test = new EtcdControl();
+
+        System.out.println("Testing usage ");
+
+        double cpuUsage = performanceMonitor.getCpuUsage();
+
+        try {
+            long delay = (cpuUsage*100 > 0.5) ? 10000 : 1000;
+            sleep(delay);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
 //        Github github = new RtGithub("e5548ec6e750cb020ab1e4706e38dc44c2b9cf99");

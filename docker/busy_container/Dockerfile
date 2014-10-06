@@ -12,3 +12,5 @@ RUN wget http://www.devin.com/lookbusy/download/lookbusy-1.3.tar.gz
 RUN tar -xzvf lookbusy-1.3.tar.gz
 RUN cd lookbusy-1.3 && ./configure && make && make install
 
+ADD start-to-lookbusy.sh ./
+

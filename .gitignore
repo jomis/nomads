@@ -20,4 +20,5 @@ hs_err_pid*
 #All class files etc.
 *.class
 */target/**
+*.war
 
