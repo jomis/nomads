@@ -1,1 +1,11 @@
-migrateable: yes
+origin: wienit/buildings
+repo: 192.168....
+migrationconstraints:
+  allow:
+     - 'wienenergie'
+     - 'wienernetze'
+communcationconstraints:
+  - endpoints: '/balbal/.*'
+    allow:
+      - 'wienenergie'
+      - 'wienernetze'
