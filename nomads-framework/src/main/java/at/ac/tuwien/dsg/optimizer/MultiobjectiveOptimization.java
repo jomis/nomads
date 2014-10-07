@@ -20,7 +20,7 @@ public class MultiobjectiveOptimization {
         dtlz.setFunction(DTLZModule.Function.DTLZ1);
         ViewerModule viewer = new ViewerModule();
         viewer.setCloseOnStop(false);
-
+        //TODO Set to correct Problem
         Runnable optimizationTask = () -> {
             Opt4JTask task = new Opt4JTask(false);
             task.init(ea, dtlz, viewer);
