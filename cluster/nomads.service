@@ -2,7 +2,7 @@
 Description=Nomads Service
 After=etcd.service
 After=docker.service
-#Requires=nomads-registry.service
+Requires=nomads-registry.service
 #Docker inspect !
 
 [Service]
@@ -14,3 +14,6 @@ ExecStartPre=-/usr/bin/docker rm nomads
 ExecStartPre=/usr/bin/docker pull jomis/nomads
 ExecStart=/usr/bin/docker run --name nomads -p ${COREOS_PRIVATE_IPV4}:7002:7002 -e PUBLIC_IP=${COREOS_PRIVATE_IPV4} jomis/nomads
 ExecStop=/usr/bin/docker stop nomads
+
+[X-Fleet]
+MachineOf=nomads-registry.service
