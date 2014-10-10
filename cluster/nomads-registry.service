@@ -1,0 +1,15 @@
+[Unit]
+Description=Nomads Registry
+After=etcd.service
+After=docker.service
+
+
+[Service]
+TimeoutStartSec=0
+KillMode=none
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill nomads-registry
+ExecStartPre=-/usr/bin/docker rm nomads-registry
+ExecStartPre=/usr/bin/docker pull registry
+ExecStart=/usr/bin/docker run --name nomads-registry -p 5000:5000 registry
+ExecStop=/usr/bin/docker stop nomads-registry

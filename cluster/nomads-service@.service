@@ -1,0 +1,16 @@
+[Unit]
+Description=%i
+After=etcd.service
+After=docker.service
+
+
+[Service]
+TimeoutStartSec=0
+KillMode=none
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill nomads-service-%i
+ExecStartPre=-/usr/bin/docker rm nomads-service-%i
+ExecStartPre=/usr/bin/docker pull jomis/simple-busy-service
+ExecStart=/usr/bin/docker run --name nomads-service-%i -P -e PUBLIC_IP=${COREOS_PRIVATE_IPV4} jomis/simple-busy-service
+ExecStop=/usr/bin/docker stop nomads-service-%i
+ExecStartPost=/bin/bash -c "sleep 5; export porticus=`/usr/bin/docker inspect -f '{{range .NetworkSettings.Ports }}{{ (index (index . 0) \"HostPort\") }} {{end}}' nomads-service-%i`; echo $porticus;/usr/bin/etcdctl set /nomads/services/%i \"${COREOS_PRIVATE_IPV4}:$(echo $porticus)\""
