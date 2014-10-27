@@ -44,7 +44,7 @@ coreos:
 EOF
 
 
-image_string=CoreOS
+image_string=444.4.0
 ip_string=$2
 
 image_id=$(
