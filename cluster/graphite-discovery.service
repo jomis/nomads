@@ -1,0 +1,36 @@
+[Unit]
+Description=Graphite etcd registration
+
+# Requirements
+Requires=etcd.service
+Requires=graphite.service
+
+# Dependency ordering and binding
+After=etcd.service
+After=graphite.service
+BindsTo=graphite.service
+
+[Service]
+
+# Get CoreOS environmental variables
+EnvironmentFile=/etc/environment
+
+# Start
+## Test whether service is accessible and then register useful information
+ExecStart=/bin/bash -c '\
+  while true; do \
+    curl -f ${COREOS_PRIVATE_IPV4}:9898; \
+    if [ $? -eq 0 ]; then \
+      etcdctl set /services/graphite/endpoint \'http://${COREOS_PRIVATE_IPV4}:9898\' --ttl 30; \
+    else \
+      etcdctl rm /services/graphite/endpoint; \
+    fi; \
+    sleep 20; \
+  done'
+
+# Stop
+ExecStop=/usr/bin/etcdctl rm /services/graphite/endpoint
+
+[X-Fleet]
+# Schedule on the same machine as the associated Apache service
+X-ConditionMachineOf=graphite.service

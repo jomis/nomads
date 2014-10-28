@@ -1,0 +1,16 @@
+[Unit]
+Description=Graphite Monitoring/Charting Service
+After=etcd.service
+After=docker.service
+
+
+
+[Service]
+TimeoutStartSec=0
+KillMode=none
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStartPre=/usr/bin/docker pull nickstenning/graphite
+ExecStart=/usr/bin/docker run --name %n -p ${COREOS_PRIVATE_IPV4}:2003:2003 -p ${COREOS_PRIVATE_IPV4}:2004:2004 -p ${COREOS_PRIVATE_IPV4}:9898:80 -p ${COREOS_PRIVATE_IPV4}:7002:7002 -e PUBLIC_IP=${COREOS_PRIVATE_IPV4} nickstenning/graphite
+ExecStop=/usr/bin/docker stop %n

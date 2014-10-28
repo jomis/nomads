@@ -12,7 +12,7 @@ EnvironmentFile=/etc/environment
 ExecStartPre=-/usr/bin/docker kill nomads
 ExecStartPre=-/usr/bin/docker rm nomads
 ExecStartPre=/usr/bin/docker pull jomis/nomads
-ExecStart=/usr/bin/docker run --name nomads -p ${COREOS_PRIVATE_IPV4}:7002:7002 -e PUBLIC_IP=${COREOS_PRIVATE_IPV4} jomis/nomads
+ExecStart=/usr/bin/docker run --name nomads -p ${COREOS_PRIVATE_IPV4}:7002:7002 -p ${COREOS_PRIVATE_IPV4}:6782:6782  -e PUBLIC_IP=${COREOS_PRIVATE_IPV4} jomis/nomads
 ExecStop=/usr/bin/docker stop nomads
 
 [X-Fleet]

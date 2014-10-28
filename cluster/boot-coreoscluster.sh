@@ -71,7 +71,7 @@ instance_name=instance-$(date +"%s")
 echo "Starting instance..."
 nova boot \
   --image $image_id \
-  --flavor m1.tiny \
+  --flavor m1.small \
   --key_name dsg-cloud \
   --user-data $user_data_file \
   --min-count 3 \
