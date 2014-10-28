@@ -1,0 +1,18 @@
+[Unit]
+Description=Diamond Monitoring Service
+After=etcd.service
+After=docker.service
+#Docker inspect !
+
+[Service]
+TimeoutStartSec=0
+KillMode=none
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStartPre=/usr/bin/docker pull jomis/diamond_monitoring_container
+ExecStart=/bin/bash -c 'while [ "$(etcdctl get /services/nomads/endpoint)" = "" ]; do sleep 4; done; /usr/bin/docker run --name %n -e NOMADSENDPOINT="$(etcdctl get /services/nomads/endpoint)" jomis/nomads'
+ExecStop=/usr/bin/docker stop %n
+
+[X-Fleet]
+Global=true

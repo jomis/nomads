@@ -1,0 +1,36 @@
+[Unit]
+Description=Nomads etcd registration
+
+# Requirements
+Requires=etcd.service
+Requires=nomads.service
+
+# Dependency ordering and binding
+After=etcd.service
+After=nomads.service
+BindsTo=nomads.service
+
+[Service]
+
+# Get CoreOS environmental variables
+EnvironmentFile=/etc/environment
+
+# Start
+## Test whether service is accessible and then register useful information
+ExecStart=/bin/bash -c '\
+  while true; do \
+    curl -f ${COREOS_PRIVATE_IPV4}:6782; \
+    if [ $? -eq 0 ]; then \
+      etcdctl set /services/nomads/endpoint \'http://${COREOS_PRIVATE_IPV4}:6782\' --ttl 30; \
+    else \
+      etcdctl rm /services/nomads/endpoint; \
+    fi; \
+    sleep 20; \
+  done'
+
+# Stop
+ExecStop=/usr/bin/etcdctl rm /services/nomads/endpoint
+
+[X-Fleet]
+# Schedule on the same machine as the associated Apache service
+X-ConditionMachineOf=nomads.service
