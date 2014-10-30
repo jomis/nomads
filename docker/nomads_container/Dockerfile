@@ -14,6 +14,9 @@ RUN apt-get install -y oracle-java8-installer
 # Fetch ETCD Binary
 RUN cd opt && curl -LO https://github.com/coreos/etcd/releases/download/v0.4.6/etcd-v0.4.6-linux-amd64.tar.gz && tar -xzf etcd-v0.4.6-linux-amd64.tar.gz
 
+# Fetch FLEETCTL Binary
+RUN cd opt && curl -LO https://github.com/coreos/fleet/releases/download/v0.8.3/fleet-v0.8.3-linux-amd64.tar.gz && tar -xzf fleet-v0.8.3-linux-amd64.tar.gz
+
 # Fetch Nomads and build it
 
 RUN mkdir /opt/nomads

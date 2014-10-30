@@ -1,5 +1,6 @@
 package at.ac.tuwien.dsg;
 
+import at.ac.tuwien.dsg.mediator.NomadsController;
 import at.ac.tuwien.dsg.model.Deployment;
 import at.ac.tuwien.dsg.model.Utilisation;
 import at.ac.tuwien.dsg.model.FastKeyValueStore;
@@ -18,7 +19,9 @@ public class Nomads {
 //        EtcdControl etcdControl = new EtcdControl();
 //        etcdControl.getAll();
 
-          NomadsResourceServer.startServer(args);
+        NomadsController.testMe();
+
+//          NomadsResourceServer.startServer(args);
 //        NomadsResourceServer server = new NomadsResourceServer();
 //        server.startServer(args);
 //        try {
