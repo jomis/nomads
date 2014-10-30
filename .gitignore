@@ -22,3 +22,11 @@ hs_err_pid*
 */target/**
 *.war
 
+nomadsStore.dbf.0
+nomadsStore.dbf.t
+nomadsStore.dbr.0
+nomadsStore.dbr.t
+nomadsStore.idf.0
+nomadsStore.idf.t
+nomadsStore.idr.0
+nomadsStore.idr.t
