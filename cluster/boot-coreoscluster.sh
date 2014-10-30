@@ -9,8 +9,10 @@ set -e
 token=$(curl https://discovery.etcd.io/new)
 
 user_data_file=$HOME/.cache/nova-default-user-data
+num_instances=3
 
-cat >$user_data_file <<EOF
+for i in $(seq 1 $num_instances); do
+  cat >${user_data_file}_$i <<EOF
 #cloud-config
 coreos:
   etcd:
@@ -21,6 +23,7 @@ coreos:
     peer-addr: \$private_ipv4:7001
   fleet:
     public-ip: \$private_ipv4
+    metadata: provider=$i
   units:
     - name: etcd.service
       command: start
@@ -42,7 +45,7 @@ coreos:
         WantedBy=sockets.target
 
 EOF
-
+done
 
 image_string=444.4.0
 ip_string=$2
@@ -68,14 +71,15 @@ echo "Found image '${image_name}'..."
 
 instance_name=instance-$(date +"%s")
 
-echo "Starting instance..."
-nova boot \
-  --image $image_id \
-  --flavor m1.small \
-  --key_name dsg-cloud \
-  --user-data $user_data_file \
-  --min-count 3 \
-  $instance_name
+for i in $(seq 1 $num_instances); do
+  echo "Starting instance... $i"
+  nova boot \
+    --image $image_id \
+    --flavor m1.small \
+    --key_name dsg-cloud \
+    --user-data ${user_data_file}_$i \
+    ${instance_name}_$i
+done
 
 
 if [ $? -ne 0 ]; then
