@@ -17,6 +17,7 @@ public class NomadsResourceServer {
 
     private static String BASE_URI_TEMPLATE = "http://{0}:9898";
 
+    private static boolean persistentMonitoring = false;
 
     private static String BASE_URI;
 

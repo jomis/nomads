@@ -5,3 +5,5 @@
 fleetctl destroy *.service
 fleetctl unload *.service
 fleetctl load -no-block *.service
+
+exit

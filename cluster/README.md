@@ -12,3 +12,15 @@ e.g.  ssh-add ~/.ssh/dsg-cloud.pem
 2a) fleetctl --tunnel 128.130.172.190 list-machines
 2b) FLEETCTL_ENDPOINT=http://<IP:[PORT]> fleetctl list-units
 
+
+Scenario Creation
+====
+
+
+
+
+TODOs
+==== 
+
+Basic todos what needs to be done until this works as expected. Also important for longer abstinecen since I have no 
+idea what :) ? 
