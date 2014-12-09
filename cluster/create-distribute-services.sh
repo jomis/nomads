@@ -8,11 +8,11 @@ DSCOUNT=$2
 
 echo "Creating $CSCOUNT computing services with $DSCOUNT data services"
 
-#fleetctl submit nomads-service\@.service
-#
-#for NAME in "${NAMES[@]}"
-#do
-#    fleetctl start nomads-service\@$NAME.service
-#done
+fleetctl submit nomads-service\@.service
+
+for NAME in "${NAMES[@]}"
+do
+    fleetctl start nomads-service\@$NAME.service
+done
 
 exit

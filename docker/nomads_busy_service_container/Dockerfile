@@ -11,7 +11,7 @@ RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true 
 RUN apt-get install -y oracle-java8-installer
 
 # Install Jetty
-ADD http://eclipse.org/downloads/download.php?file=/jetty/stable-9/dist/jetty-distribution-9.2.3.v20140905.tar.gz&r=1 /opt/jetty.tar.gz
+ADD http://eclipse.org/downloads/download.php?file=/jetty/stable-9/dist/jetty-distribution-9.2.5.v20141112.tar.gz&r=1 /opt/jetty.tar.gz
 RUN tar -xvf /opt/jetty.tar.gz -C /opt/
 RUN rm /opt/jetty.tar.gz
 RUN mv /opt/jetty-distribution-* /opt/jetty
@@ -26,7 +26,7 @@ ENV JETTY_HOME /opt/jetty
 
 
 # Install Lookbusy
-
+RUN apt-get update
 RUN apt-get -y install libpcre3 libssl-dev
 RUN apt-get -y install libpcre3-dev
 RUN apt-get -y install wget zip gcc make
