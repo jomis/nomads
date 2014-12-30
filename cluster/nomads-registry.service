@@ -13,3 +13,6 @@ ExecStartPre=-/usr/bin/docker rm nomads-registry
 ExecStartPre=/usr/bin/docker pull registry
 ExecStart=/usr/bin/docker run --name nomads-registry -p 5000:5000 registry
 ExecStop=/usr/bin/docker stop nomads-registry
+
+[X-Fleet]
+Conflicts=graphite*

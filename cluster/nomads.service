@@ -2,7 +2,7 @@
 Description=Nomads Service
 After=etcd.service
 After=docker.service
-Requires=nomads-registry.service
+#Requires=nomads-registry.service
 #Docker inspect !
 
 [Service]
@@ -13,6 +13,7 @@ ExecStartPre=-/usr/bin/docker kill nomads
 ExecStartPre=-/usr/bin/docker rm nomads
 ExecStartPre=/usr/bin/docker pull jomis/nomads
 ExecStart=/usr/bin/docker run --name nomads -p ${COREOS_PRIVATE_IPV4}:7002:7002 -p ${COREOS_PRIVATE_IPV4}:6782:6782  -e PUBLIC_IP=${COREOS_PRIVATE_IPV4} jomis/nomads
+#ExecStartPost=/bin/bash -c "sleep 5; export porticus=`/usr/bin/docker inspect -f '{{range .NetworkSettings.Ports }}{{ (index (index . 0) \"HostPort\") }} {{end}}' nomads`; echo $porticus;/usr/bin/etcdctl set /nomads/endpoint \"${COREOS_PRIVATE_IPV4}:$(echo $porticus)\""
 ExecStop=/usr/bin/docker stop nomads
 
 [X-Fleet]

@@ -5,6 +5,7 @@ import at.ac.tuwien.dsg.model.FastKeyValueStore;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,14 +20,11 @@ public class NomadsService {
     private static FastKeyValueStore store = new FastKeyValueStore();
 
     /**
-     * Method handling HTTP GET requests. The returned object will be sent
-     * to the client as "text/plain" media type.
-     *
-     * @return String that will be returned as a text/plain response.
+     * Request proxy for all service calls in the Environment
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String computeIt() {
+    public Response forwardRequest() {
 
         //Compute something based on utilization aka delay it
 

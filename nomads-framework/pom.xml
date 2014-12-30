@@ -109,6 +109,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.littleshoot</groupId>
+            <artifactId>littleproxy</artifactId>
+            <version>1.0.0-beta7</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.opt4j</groupId>
             <artifactId>opt4j-core</artifactId>
             <version>3.1.2</version>

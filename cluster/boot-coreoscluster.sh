@@ -12,6 +12,7 @@ user_data_file=$HOME/.cache/nova-default-user-data
 num_instances=3
 
 for i in $(seq 1 $num_instances); do
+  echo "${token}"
   cat >${user_data_file}_$i <<EOF
 #cloud-config
 coreos:

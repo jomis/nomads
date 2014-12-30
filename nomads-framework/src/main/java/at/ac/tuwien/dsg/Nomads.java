@@ -6,6 +6,7 @@ import at.ac.tuwien.dsg.model.Utilisation;
 import at.ac.tuwien.dsg.model.FastKeyValueStore;
 import at.ac.tuwien.dsg.services.NomadsResourceServer;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -19,16 +20,16 @@ public class Nomads {
 //        EtcdControl etcdControl = new EtcdControl();
 //        etcdControl.getAll();
 
-        NomadsController.testMe();
+        //NomadsController.testMe();
 
-//          NomadsResourceServer.startServer(args);
-//        NomadsResourceServer server = new NomadsResourceServer();
-//        server.startServer(args);
-//        try {
-//            System.in.read();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        NomadsResourceServer.startServer(args);
+        NomadsResourceServer server = new NomadsResourceServer();
+        server.startServer(args);
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 //        FastKeyValueStore store = new FastKeyValueStore();
 //        List<Utilisation> utilisations = store.getUtilisationByMetric("01");
