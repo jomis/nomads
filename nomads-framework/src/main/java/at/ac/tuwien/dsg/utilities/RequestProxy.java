@@ -23,26 +23,26 @@ public class RequestProxy {
                         .withFiltersSource(new HttpFiltersSourceAdapter() {
                             public HttpFilters filterRequest(HttpRequest originalRequest, ChannelHandlerContext ctx) {
                                 return new HttpFiltersAdapter(originalRequest) {
-                                    @Override
+//                                    @Override
                                     public HttpResponse clientToProxyRequest(HttpObject httpObject) {
                                         // TODO: implement your filtering here
 
                                         return null;
                                     }
 
-                                    @Override
+//                                    @Override
                                     public HttpResponse proxyToServerRequest(HttpObject httpObject) {
                                         // TODO: implement your filtering here
                                         return null;
                                     }
 
-                                    @Override
+//                                    @Override
                                     public HttpObject serverToProxyResponse(HttpObject httpObject) {
                                         // TODO: implement your filtering here
                                         return httpObject;
                                     }
 
-                                    @Override
+//                                    @Override
                                     public HttpObject proxyToClientResponse(HttpObject httpObject) {
                                         // TODO: implement your filtering here
                                         return httpObject;

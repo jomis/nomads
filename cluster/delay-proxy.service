@@ -1,0 +1,25 @@
+[Unit]
+Description=Delay Proxy Service
+After=etcd.service
+After=docker.service
+#Requires=nomads-registry.service
+#Docker inspect !
+
+[Service]
+TimeoutStartSec=0
+KillMode=none
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill delay-proxy
+ExecStartPre=-/usr/bin/docker rm delay-proxy
+ExecStartPre=/usr/bin/docker pull jomis/delay_proxy_container
+ExecStart=/usr/bin/docker run --privileged=true --name delay-proxy jomis/delay_proxy_container
+ExecStartPost=/bin/bash -c '\
+    sleep 25;\
+    echo "This should say something";\
+    /usr/bin/docker inspect -f "{{ .NetworkSettings.IPAddress }}" delay-proxy;\
+    echo "but it doesnt";\
+    export SQUIDBOX=`/usr/bin/docker inspect -f "{{ .NetworkSettings.IPAddress }}" delay-proxy`; \
+    iptables -t nat -A PREROUTING -i docker0 -s ! ${SQUIDBOX} -p tcp -j DNAT --to ${SQUIDBOX}:3128; \
+    echo iptables -t nat -A POSTROUTING -o docker0 -s local-network -d ${SQUIDBOX} -j SNAT --to ${COREOS_PRIVATE_IPV4};'
+ExecStop=/usr/bin/docker stop delay-proxy
+

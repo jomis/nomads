@@ -12,7 +12,6 @@
 	<modules>
 		<module>nomads-framework</module>
 		<module>simple-service</module>
-        <module>nomads-evaluation</module>
     </modules>
 
 	<build>
