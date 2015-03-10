@@ -1,7 +1,12 @@
 Nomads
 ======
 
-Nomads Framework enables dynamic service mobility for Distributed Analytical Service Environments.
+Nomads Framework enables dynamic service mobility for Distributed Analytical Service Environments. The following figure shows an architecture
+ overview of the framework.
+
+
+![alt tag](https://raw.githubusercontent.com/jomis/nomads/master/complementary/framework_overview.png)
+
 
 Setup
 =====
