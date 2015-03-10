@@ -18,3 +18,4 @@ ExecStop=/usr/bin/docker stop nomads
 
 [X-Fleet]
 MachineOf=nomads-registry.service
+

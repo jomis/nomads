@@ -1,7 +1,7 @@
 simple-serivce
 ======
 
-Exposes a dummy computational and data service on 
+Exposes a dummy computational and data service on
  
  http://{host}/application/webapi/computingresource
  http://{host}/application/webapi/dataresource
@@ -10,6 +10,5 @@ Exposes a dummy computational and data service on
 Build
 ===
 
-mvn ....
+With maven after that be sure to rebuild the Docker images
 
-then redeploy the Docker Image
