@@ -15,6 +15,9 @@ This repository contains all scripts to setup an Nomads enabled environment base
 ensure your Openstack Credentials are set correctly by adapting the boot-coreoscluster.sh script. Then execute the script.
 After executing the script execute create-distribute-services.sh to simulate the service environment.
 
-Then you can utilise the service descriptions via fleetctl to simulate different Service scenarios.
+Then you can utilise the service descriptions via fleetctl to simulate different Service scenarios. If you stick to the defaults
+the scripts will setup an enivornment as illustrated in the figure below.
+
+![alt tag](https://raw.githubusercontent.com/jomis/nomads/master/complementary/deployment_overview.png)
 
 
